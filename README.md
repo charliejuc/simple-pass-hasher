@@ -3,7 +3,7 @@
 ## How to use it?
 ### Basic Usage
 
-**Hasher(opts)**
+**[ Hasher(opts) ]**
 
 ```
 
@@ -12,11 +12,11 @@
 	const hasher = require('simple-pass-hasher')
 
 	const fooHash = hasher({
-			password: 'fooPassword', /*String to encrypt, if not pass it, hasher will only return compare ignoring the digest */
-			key: 'fooSecret', //Encryption key used (Only is valid if hmac is true)
-			algorithm: 'sha1', //The algorithm used for encrypting (sha1, sha256...)
-			encoding: 'utf8', //This will determine the output format of the string after the hash
-			hmac: true //If this is false, going to use "createHash" method, otherwise use "createHmac"
+			password: 'fooPassword',
+			key: 'fooSecret', 
+			algorithm: 'sha1', 
+			encoding: 'utf8', 
+			hmac: true 
 		}, function (err) {
 			console.log(err)
 		})
@@ -73,7 +73,7 @@
 ```
 
 ### Options
-* **password[?]:** String to encrypt
+* **password[?]:** String to encrypt, if not pass it, hasher will only return compare ignoring the digest
 * **algorithn[?]:** The algorithm used for encrypting (sha1, sha256...) - Default value is **"sha1"**
 * **encoding[?]:** This will determine the output format of the string after the hash - Default value is **"utf8"**
 * **hmac[?]:** If this is false, going to use "createHash" method, otherwise use "createHmac" - Default is **false**
