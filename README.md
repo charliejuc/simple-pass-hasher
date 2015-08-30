@@ -3,7 +3,7 @@
 ## How to use it?
 ### Basic Usage
 
-**[ Hasher(opts) ]**
+**[ Hasher(opts, callback[error]) ]**
 
 ```
 
