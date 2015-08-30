@@ -73,8 +73,8 @@
 ```
 
 ### Options
-* **password[?]** String to encrypt
-* **algorithn[?]** The algorithm used for encrypting (sha1, sha256...) - Default value is **"sha1"**
-* **encoding[?]** This will determine the output format of the string after the hash - Default value is **"utf8"**
-* **hmac[?]** If this is false, going to use "createHash" method, otherwise use "createHmac" - Default is **false**
-* **key[?]** Encryption key used (Only is valid if hmac is true)
+* **password[?]:** String to encrypt
+* **algorithn[?]:** The algorithm used for encrypting (sha1, sha256...) - Default value is **"sha1"**
+* **encoding[?]:** This will determine the output format of the string after the hash - Default value is **"utf8"**
+* **hmac[?]:** If this is false, going to use "createHash" method, otherwise use "createHmac" - Default is **false**
+* **key[?]:** Encryption key used (Only is valid if hmac is true)
