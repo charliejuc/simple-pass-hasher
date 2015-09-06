@@ -51,9 +51,11 @@
 	fooHash.compare(JSON.stringify({ username: '@charliejuc', password: '123456' }), digest) 
 	//This will return true
 
-### Only compare function
 
 ```
+
+### Only compare function
+
 	
 	// Now, we don't pass string
 	const fooHash = hasher({
