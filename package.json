@@ -1,6 +1,6 @@
 {
   "name": "simple-pass-hasher",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This module make it simple to hash passwords and others strings.",
   "main": "index.js",
   "scripts": {

@@ -31,10 +31,6 @@
 ### Passing Object As Key or String
 ```
 
-	'use strict'
-
-	const hasher = require('simple-pass-hasher')
-
 	const fooHash = hasher({
 			password: { username: '@charliejuc', password: '123456' },
 			key: { home: 'It\'s a good place', hey: 'All this json will be used as key' }, 
@@ -55,7 +51,7 @@
 ```
 
 ### Only compare function
-
+```
 	
 	// Now, we don't pass string
 	const fooHash = hasher({
