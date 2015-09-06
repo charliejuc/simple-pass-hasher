@@ -3,7 +3,7 @@
 ## How to use it?
 ### Basic Usage
 
-**[ Hasher(opts, callback[error]) ]**
+**[ Hasher(opts) ]**
 
 ```
 
@@ -17,8 +17,6 @@
 			algorithm: 'sha1', 
 			encoding: 'utf8', 
 			hmac: true 
-		}, function (err) {
-			console.log(err)
 		})
 
 	let digest = fooHash.digest //Return encrypted string
@@ -30,6 +28,29 @@
 	fooHash.compare('otherPassword', digest) //This will return false
 ```
 
+### Passing Object As Key or String
+```
+
+	'use strict'
+
+	const hasher = require('simple-pass-hasher')
+
+	const fooHash = hasher({
+			password: { username: '@charliejuc', password: '123456' },
+			key: { home: 'It\'s a good place', hey: 'All this json will be used as key' }, 
+			algorithm: 'sha1', 
+			encoding: 'utf8', 
+			hmac: true 
+		})
+
+	let digest = fooHash.digest //Return encrypted string
+
+	fooHash.compare({ username: '@charliejuc', password: '123456' }, digest) 
+	//This will return true
+
+	fooHash.compare(JSON.stringify({ username: '@charliejuc', password: '123456' }), digest) 
+	//This will return true
+
 ### Only compare function
 
 ```
@@ -40,8 +61,6 @@
 			algorithm: 'sha256', 
 			encoding: 'base64', 
 			hmac: true
-		}, function (err) {
-			console.log(err)
 		})
 
 	// Now, we don't have fooHash.digest property
@@ -62,8 +81,6 @@
 			algorithm: 'sha256', 
 			encoding: 'base64', 
 			hmac: false
-		}, function (err) {
-			console.log(err)
 		})
 	
 	let digest = fooHash.digest

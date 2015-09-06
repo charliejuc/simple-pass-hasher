@@ -2,26 +2,37 @@
 
 /*----------------------------*/
 //simple-pass-hasher
-//Author: Juan Carlos Fernández || Charliejuc
+//Author: Juan Carlos Fernández || @Charliejuc
 /*----------------------------*/
 
 const crypto = require('crypto')
 
-module.exports = function (options, callback) {
+module.exports = function (options) {
 	options = options || {}
 	let password = options.password
 	let algorithm = options.algorithm || 'sha1'
-	let encoding = options.encoding
+	let encoding = options.encoding || 'utf8'
 	let hmac = options.hmac || false
+
+	isStringExcept(algorithm, 'Algorithm')
+	isStringExcept(encoding, 'Encoding')
+
+	function isStringExcept (bar, name) {
+		if ( ! isString(bar) ) {
+			throw new Error(`${name} must be a string: ${typeof(bar)} given`)
+		}
+	}
 
 	function getHash () {
 		return crypto.createHash(algorithm)
 	}
 
-	function getHmac () {
-		let key = options.key
+	function getHmac () {		
+		if ( ! options.key ) throw new Error('Key is required')
 
-		if (! key) return callback(new Error('Key is required'))
+		let key = isObject(options.key) ? JSON.stringify(options.key) : options.key
+
+		isStringExcept(key, 'Key')
 
 		return crypto.createHmac(algorithm, key)
 	}
@@ -29,13 +40,13 @@ module.exports = function (options, callback) {
 	function digest (pw) {
 		pw = pw || password
 
-		if (! pw) return callback(new Error('Password is required'))
+		if ( ! pw ) throw new Error('Password is required')
 
-		pw = isObject(options.password) ? JSON.stringify(pw) : pw
+		pw = isObject(pw) ? JSON.stringify(pw) : pw
+
+		isStringExcept(pw, 'Password')
 
 		let hash = hmac ? getHmac() : getHash()
-
-		if ( ! hash ) return
 
 		hash.update(pw)
 
@@ -44,7 +55,7 @@ module.exports = function (options, callback) {
 
 	function hashCompare (unencoded, encoded) {
 		if ( ! unencoded || ! encoded ) 
-			return callback(new Error('Encoded and unencoded passwords are required'))
+			throw new Error('Encoded and unencoded passwords are required')
 
 		let genPass = digest(unencoded)
 
@@ -54,12 +65,19 @@ module.exports = function (options, callback) {
 	function isObject (bar) {
 		let object = {}
 
-		if (typeof(bar) === typeof(object)) 
-		{
-			return bar.constructor === object.constructor
-		}
+		return isFoo(bar, object)
+	}
 
-		return false
+	function isString (bar) {
+		let string = ''
+
+		return isFoo(bar, string)
+	}
+
+	function isFoo (bar, comparator) {
+		if (typeof(bar) != typeof(comparator)) return false
+
+		return bar.constructor === comparator.constructor
 	}
 
 	return password ? {
